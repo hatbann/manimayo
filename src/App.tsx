@@ -3,24 +3,35 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header.tsx';
 import Home from './pages/Home.tsx';
 import Products from './pages/Products.tsx';
-/* import Cart from './pages/Cart';
-import MyPage from './pages/MyPage'; */
+import Login from './pages/Login.tsx';
+import Cart from './pages/Cart.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
+import { AuthProvider } from './contexts/AuthContext.tsx';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-{/*             <Route path="/cart" element={<Cart />} />
-            <Route path="/mypage" element={<MyPage />} /> */}
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/cart"
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
