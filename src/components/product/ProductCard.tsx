@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from '../../styles/components/productCard.module.scss';
 import { Product } from '../../types/product';
 
 interface ProductCardProps {
@@ -8,58 +8,16 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Card>
-      <ImageWrapper>
+    <div className={styles.card}>
+      <div className={styles.imageWrapper}>
         <img src={product.image} alt={product.name} />
-      </ImageWrapper>
-      <Content>
+      </div>
+      <div className={styles.content}>
         <h3>{product.name}</h3>
         <p>{product.price.toLocaleString()}원</p>
-      </Content>
-    </Card>
+      </div>
+    </div>
   );
 };
 
-const Card = styled.div`
-  border: 1px solid #eee;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-`;
-
-const ImageWrapper = styled.div`
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-  
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const Content = styled.div`
-  padding: 1rem;
-  
-  h3 {
-    margin: 0;
-    font-size: 1rem;
-  }
-  
-  p {
-    margin: 0.5rem 0 0;
-    color: #f00;
-    font-weight: bold;
-  }
-`;
-
-export default ProductCard; 
+export default ProductCard;

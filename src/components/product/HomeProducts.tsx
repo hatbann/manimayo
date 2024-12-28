@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard.tsx';
 import { Product } from '../../types/product.ts';
-import styles from '../../styles/components/productList.module.scss';
+import styles from '../../styles/components/homeProducts.module.scss';
 
-const ProductList = () => {
+const HomeProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   // 임시 데이터 (나중에 API로 대체)
@@ -55,4 +55,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default HomeProducts;

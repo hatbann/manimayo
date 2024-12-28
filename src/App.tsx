@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import Header from './components/layout/Header.tsx';
 import Home from './pages/Home.tsx';
 import Products from './pages/Products.tsx';
@@ -17,7 +22,11 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
+              <Route
+                path="/product"
+                element={<Navigate to="/product/griptok" replace />}
+              />
+              <Route path="/product/:type" element={<Products />} />
               <Route path="/login" element={<Login />} />
               <Route
                 path="/cart"

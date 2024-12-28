@@ -1,81 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { useAuth } from '../../contexts/AuthContext.tsx';
+import styles from '../../styles/header.module.scss';
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
 
   return (
-    <HeaderContainer>
-      <Nav>
-        <NavLeft>
-          <StyledLink to="/">홈</StyledLink>
-          <StyledLink to="/products">상품</StyledLink>
-        </NavLeft>
-        <NavRight>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <div className={styles.navLeft}>
+          <Link className={styles.link} to="/">
+            홈
+          </Link>
+          <Link className={styles.link} to="/product/griptok">
+            GripTok
+          </Link>
+          <Link className={styles.link} to="/product/wallet">
+            Wallet
+          </Link>
+          <Link className={styles.link} to="/product/keyring">
+            Keyring
+          </Link>
+        </div>
+        <div className={styles.navRight}>
           {isAuthenticated ? (
             <>
-              <StyledLink to="/cart">장바구니</StyledLink>
-              <StyledLink to="/mypage">마이페이지</StyledLink>
-              <LogoutButton onClick={logout}>로그아웃</LogoutButton>
+              <Link className={styles.link} to="/cart">
+                장바구니
+              </Link>
+              <Link className={styles.link} to="/mypage">
+                마이페이지
+              </Link>
+              <Link className={styles.link} to="/product/griptok">
+                GripTok
+              </Link>
+              <Link className={styles.link} to="/product/wallet">
+                Wallet
+              </Link>
+              <Link className={styles.link} to="/product/keyring">
+                Keyring
+              </Link>
+              <button className={styles.logoutButton} onClick={logout}>
+                로그아웃
+              </button>
             </>
           ) : (
-            <StyledLink to="/login">로그인</StyledLink>
+            <Link className={styles.link} to="/login">
+              로그인
+            </Link>
           )}
-        </NavRight>
-      </Nav>
-    </HeaderContainer>
+        </div>
+      </nav>
+    </header>
   );
 };
-
-const HeaderContainer = styled.header`
-  padding: 1rem 2rem;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const NavLeft = styled.div`
-  display: flex;
-  gap: 2rem;
-`;
-
-const NavRight = styled.div`
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-
-  &:hover {
-    color: #007bff;
-  }
-`;
-
-const LogoutButton = styled.button`
-  background: none;
-  border: none;
-  color: #333;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0;
-  font-size: 1rem;
-
-  &:hover {
-    color: #007bff;
-  }
-`;
 
 export default Header;

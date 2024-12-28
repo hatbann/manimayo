@@ -1,0 +1,35 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.header {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.filterSection {
+  display: flex;
+  gap: 1rem;
+  select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+}

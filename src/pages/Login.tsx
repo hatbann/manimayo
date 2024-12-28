@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import styles from '../styles/login.module.scss';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,12 +32,15 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <LoginForm onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.container}>
+      <form className={styles.loginForm} onSubmit={handleSubmit(onSubmit)}>
         <h2>로그인</h2>
-        <InputGroup>
-          <Label htmlFor="email">이메일</Label>
-          <Input
+        <div className={styles.inputGroup}>
+          <label className={styles.label} htmlFor="email">
+            이메일
+          </label>
+          <input
+            className={styles.input}
             id="email"
             {...register('email', {
               required: '이메일을 입력해주세요',
@@ -47,11 +50,16 @@ const Login = () => {
               },
             })}
           />
-          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-        </InputGroup>
-        <InputGroup>
-          <Label htmlFor="password">비밀번호</Label>
-          <Input
+          {errors.email && (
+            <p className={styles.errorMessage}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={styles.inputGroup}>
+          <label className={styles.label} htmlFor="password">
+            비밀번호
+          </label>
+          <input
+            className={styles.input}
             type="password"
             id="password"
             {...register('password', {
@@ -63,101 +71,19 @@ const Login = () => {
             })}
           />
           {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
+            <p className={styles.errorMessage}>{errors.password.message}</p>
           )}
-        </InputGroup>
-        <LoginButton type="submit">로그인</LoginButton>
-        <Links>
+        </div>
+        <button className={styles.loginButton} type="submit">
+          로그인
+        </button>
+        <div className={styles.links}>
           <a href="/signup">회원가입</a>
           <a href="/forgot-password">비밀번호 찾기</a>
-        </Links>
-      </LoginForm>
-    </Container>
+        </div>
+      </form>
+    </div>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  padding: 2rem;
-`;
-
-const LoginForm = styled.form`
-  width: 100%;
-  max-width: 400px;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-`;
-
-const InputGroup = styled.div`
-  margin-bottom: 1.5rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-
-  &:focus {
-    outline: none;
-    border-color: #666;
-  }
-`;
-
-const LoginButton = styled.button`
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const Links = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-
-  a {
-    color: #666;
-    text-decoration: none;
-    font-size: 0.9rem;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: #ff3333;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-`;
 
 export default Login;

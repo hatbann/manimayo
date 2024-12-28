@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import styles from '../styles/cart.module.scss';
 
 interface CartItem {
   id: number;
@@ -41,181 +42,66 @@ const Cart = () => {
   );
 
   return (
-    <Container>
+    <div className={styles.container}>
       <h2>장바구니</h2>
       {cartItems.length === 0 ? (
-        <EmptyCart>장바구니가 비어있��니다.</EmptyCart>
+        <div className={styles.emptyCart}>장바구니가 비어있습니다.</div>
       ) : (
         <>
-          <CartList>
+          <div>
             {cartItems.map((item) => (
-              <CartItemContainer key={item.id}>
-                <ItemImage src={item.image} alt={item.name} />
-                <ItemInfo>
-                  <ItemName>{item.name}</ItemName>
-                  <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
-                </ItemInfo>
-                <QuantityControl>
-                  <QuantityButton
+              <div className={styles.cartItemContainer} key={item.id}>
+                <img
+                  className={styles.itemImage}
+                  src={item.image}
+                  alt={item.name}
+                />
+                <div className={styles.itemInfo}>
+                  <h3 className={styles.itemName}>{item.name}</h3>
+                  <span className={styles.itemPrice}>
+                    {item.price.toLocaleString()}원
+                  </span>
+                </div>
+                <div className={styles.quantityControl}>
+                  <button
+                    className={styles.quantityButton}
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
                   >
                     -
-                  </QuantityButton>
-                  <QuantityDisplay>{item.quantity}</QuantityDisplay>
-                  <QuantityButton
+                  </button>
+                  <span className={styles.quantityDisplay}>
+                    {item.quantity}
+                  </span>
+                  <button
+                    className={styles.quantityButton}
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                   >
                     +
-                  </QuantityButton>
-                </QuantityControl>
-                <ItemTotal>
+                  </button>
+                </div>
+                <div className={styles.itemTotal}>
                   {(item.price * item.quantity).toLocaleString()}원
-                </ItemTotal>
-                <RemoveButton onClick={() => removeItem(item.id)}>
+                </div>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => removeItem(item.id)}
+                >
                   삭제
-                </RemoveButton>
-              </CartItemContainer>
+                </button>
+              </div>
             ))}
-          </CartList>
-          <TotalSection>
-            <TotalText>총 결제금액:</TotalText>
-            <TotalAmount>{totalPrice.toLocaleString()}원</TotalAmount>
-          </TotalSection>
-          <CheckoutButton>결제하기</CheckoutButton>
+          </div>
+          <div className={styles.totalSection}>
+            <span className={styles.totalText}>총 결제금액:</span>
+            <span className={styles.totalAmount}>
+              {totalPrice.toLocaleString()}원
+            </span>
+          </div>
+          <button className={styles.checkoutButton}>결제하기</button>
         </>
       )}
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const EmptyCart = styled.div`
-  text-align: center;
-  padding: 3rem;
-  font-size: 1.1rem;
-  color: #666;
-`;
-
-const CartList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const CartItemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const ItemImage = styled.img`
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-`;
-
-const ItemInfo = styled.div`
-  flex: 1;
-  margin-left: 1rem;
-`;
-
-const ItemName = styled.h3`
-  margin: 0 0 0.5rem 0;
-`;
-
-const ItemPrice = styled.div`
-  color: #666;
-`;
-
-const QuantityControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 2rem;
-`;
-
-const QuantityButton = styled.button`
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ddd;
-  background: white;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background: #f5f5f5;
-  }
-`;
-
-const QuantityDisplay = styled.span`
-  min-width: 30px;
-  text-align: center;
-`;
-
-const ItemTotal = styled.div`
-  font-weight: bold;
-  margin: 0 2rem;
-`;
-
-const RemoveButton = styled.button`
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #ff4444;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background: #ff0000;
-  }
-`;
-
-const TotalSection = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 2rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const TotalText = styled.span`
-  font-size: 1.2rem;
-  margin-right: 1rem;
-`;
-
-const TotalAmount = styled.span`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bff;
-`;
-
-const CheckoutButton = styled.button`
-  display: block;
-  width: 200px;
-  margin: 2rem 0 0 auto;
-  padding: 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  cursor: pointer;
-
-  &:hover {
-    background: #0056b3;
-  }
-`;
 
 export default Cart;

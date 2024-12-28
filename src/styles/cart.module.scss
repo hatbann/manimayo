@@ -1,0 +1,29 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.emptyCart {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// ... 나머지 스타일들도 동일한 방식으로 변환 ...
